@@ -1,4 +1,11 @@
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentManagement {
     public static void main(String[] args) {
@@ -15,7 +22,7 @@ public class StudentManagement {
             option = scanner.nextLine();
             switch (option) {
                 case "A":
-                    System.out.println("View Students");
+                    viewStudents();
                     break;
                 case "B":
                     System.out.println("Add Student");
@@ -36,4 +43,85 @@ public class StudentManagement {
         } while (!option.equals("E"));
     }
 
+    public static void viewStudents() {
+        List<Student> students = readDataFromCSV("students.txt");
+
+        for (Student student : students) {
+            System.out.println(student);
+        }
+
+    }
+
+    public static void addStudent() {
+        //
+
+    }
+
+    private static List<Student> readDataFromCSV(String fileName) {
+        List<Student> students = new ArrayList<Student>();
+        Path pathToFile = Paths.get(fileName);
+
+        try (BufferedReader br = Files.newBufferedReader(pathToFile, StandardCharsets.US_ASCII)) {
+            String Line = br.readLine();
+            while (Line != null) {
+                String[] attributes = Line.split(",");
+                Student student = createStudent(attributes);
+                students.add(student);
+                Line = br.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return students;
+    }
+
+    private static Student createStudent(String[] metaData) {
+        int id = Integer.parseInt(metaData[0]);
+        String name = metaData[1];
+        String college = metaData[2];
+
+        return new Student(id, name, college);
+    }
+
+}
+
+class Student {
+    private int id;
+    private String name;
+    private String college;
+
+    public Student(int id, String name, String college) {
+        this.id = id;
+        this.name = name;
+        this.college = college;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", name=" + name + ", college=" + college + "]";
+    }
 }
