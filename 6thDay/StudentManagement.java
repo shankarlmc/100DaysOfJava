@@ -45,15 +45,17 @@ public class StudentManagement {
 
     public static void viewStudents() {
         List<Student> students = readDataFromCSV("students.txt");
-
+        System.out.println("========================= Available Students ====================");
         for (Student student : students) {
             System.out.println(student);
+
         }
+        System.out.println("====================================================");
 
     }
 
     public static void addStudent() {
-        //
+        // add student record to the file
 
     }
 
