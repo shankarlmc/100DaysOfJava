@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentManagement {
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public static void main(String[] args) {
         String option = "";
         Scanner scanner = new Scanner(System.in);
@@ -25,7 +29,7 @@ public class StudentManagement {
                     viewStudents();
                     break;
                 case "B":
-                    System.out.println("Add Student");
+                    addStudent();
                     break;
                 case "C":
                     System.out.println("Update Details");
@@ -55,7 +59,26 @@ public class StudentManagement {
     }
 
     public static void addStudent() {
-        // add student record to the file
+        try {
+            System.out.println("------------------------------------------------");
+            System.out.println("Enter Student ID: ");
+            int id = Integer.parseInt(reader.readLine());
+            System.out.println("------------------------------------------------");
+            System.out.println("Enter Student Name: ");
+            String name = reader.readLine();
+            System.out.println("------------------------------------------------");
+            System.out.println("Enter Student College: ");
+            String college = reader.readLine();
+            System.out.println("------------------------------------------------");
+            String data = id + "," + name + "," + college;
+            writeDataToCSV("students.txt", data);
+            Student student = new Student(id, name, college);
+            List<Student> students = readDataFromCSV("students.txt");
+            students.add(student);
+            // writeDataToCSV(students, "students.txt");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -75,6 +98,18 @@ public class StudentManagement {
             System.out.println("Error: " + e.getMessage());
         }
         return students;
+    }
+
+    private static void writeDataToCSV(String fileName, String data) {
+        try {
+            FileWriter fileWriter = new FileWriter("students.txt", true);
+            fileWriter.write(data);
+            fileWriter.close();
+            System.out.println("Data written to file successfully");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
     }
 
     private static Student createStudent(String[] metaData) {
