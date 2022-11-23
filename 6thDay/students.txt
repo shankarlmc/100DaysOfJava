@@ -1,1 +1,3 @@
-1,Shankar Lamichhane,Prithvi Narayan Campus2,SHankar Lamichhane,Prithvi Narayan Campus
+1,Shankar Lamichhane,Prithvi Narayan Campus2
+12,Abc ,Mount Annapurna Campus
+4,Radhe Shyam,Mount Valley

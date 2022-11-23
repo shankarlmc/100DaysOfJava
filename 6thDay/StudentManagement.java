@@ -1,7 +1,9 @@
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,12 +51,15 @@ public class StudentManagement {
 
     public static void viewStudents() {
         List<Student> students = readDataFromCSV("students.txt");
-        System.out.println("========================= Available Students ====================");
-        for (Student student : students) {
-            System.out.println(student);
+        String leftAlignFormat = "| %-3d | %-18s  | %-26s |%n";
+        System.out.format("+-----+---------------------+----------------------------+%n");
+        System.out.format("| ID  | Name                |   College                  |%n");
+        System.out.format("+-----+---------------------+----------------------------+%n");
 
+        for (Student student : students) {
+            System.out.format(leftAlignFormat, student.getId(), student.getName(), student.getCollege());
         }
-        System.out.println("====================================================");
+        System.out.println("-----------------------------------------------------------");
 
     }
 
@@ -75,7 +80,6 @@ public class StudentManagement {
             Student student = new Student(id, name, college);
             List<Student> students = readDataFromCSV("students.txt");
             students.add(student);
-            // writeDataToCSV(students, "students.txt");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -102,7 +106,8 @@ public class StudentManagement {
 
     private static void writeDataToCSV(String fileName, String data) {
         try {
-            FileWriter fileWriter = new FileWriter("students.txt", true);
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter("students.txt", true));
+            fileWriter.newLine();
             fileWriter.write(data);
             fileWriter.close();
             System.out.println("Data written to file successfully");
@@ -159,6 +164,8 @@ class Student {
 
     @Override
     public String toString() {
-        return "Student [id=" + id + ", name=" + name + ", college=" + college + "]";
+
+        return "|\t" + id + "\t|\t" + name + "\t|\t" + college + "\t|";
+
     }
 }
