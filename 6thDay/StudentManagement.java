@@ -34,7 +34,9 @@ public class StudentManagement {
                     addStudent();
                     break;
                 case "C":
-                    System.out.println("Update Details");
+                    System.out.println("Enter student ID: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+                    updateStudent(id);
                     break;
                 case "D":
                     System.out.println("Delete Student");
@@ -60,6 +62,29 @@ public class StudentManagement {
             System.out.format(leftAlignFormat, student.getId(), student.getName(), student.getCollege());
         }
         System.out.println("-----------------------------------------------------------");
+
+    }
+
+    public static void updateStudent(int id) {
+        try {
+            List<Student> students = readDataFromCSV("students.txt");
+            for (Student student : students) {
+                if (student.getId() == id) {
+                    System.out.println("Enter new name: ");
+                    String name = reader.readLine();
+                    student.setName(name);
+                    System.out.println("Enter new college: ");
+                    String college = reader.readLine();
+                    student.setCollege(college);
+                    String data = id + "," + name + "," + college;
+                    writeDataToCSV("students.txt", data);
+                } else {
+                    System.out.println("Student not found");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -164,8 +189,6 @@ class Student {
 
     @Override
     public String toString() {
-
         return "|\t" + id + "\t|\t" + name + "\t|\t" + college + "\t|";
-
     }
 }
