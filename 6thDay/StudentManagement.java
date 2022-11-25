@@ -39,7 +39,9 @@ public class StudentManagement {
                     updateStudent(id);
                     break;
                 case "D":
-                    System.out.println("Delete Student");
+                    System.out.println("Enter student ID: ");
+                    int studentId = Integer.parseInt(scanner.nextLine());
+                    deleteStudent(studentId);
                     break;
                 case "E":
                     System.out.println("***************** Bye! Bye!! Bye!!! *****************");
@@ -109,6 +111,23 @@ public class StudentManagement {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public static void deleteStudent(int id) {
+        try {
+            List<Student> students = readDataFromCSV("students.txt");
+            for (Student student : students) {
+                if (student.getId() == id) {
+                    students.remove(student);
+                    System.out.println("Student deleted successfully");
+                    break;
+                } else {
+                    System.out.println("Student not found");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static List<Student> readDataFromCSV(String fileName) {
