@@ -70,7 +70,10 @@ public class StudentManagement {
     public static void updateStudent(int id) {
         try {
             List<Student> students = readDataFromCSV("students.txt");
+            // print files row col
+            int count = 0;
             for (Student student : students) {
+                System.out.println(count);
                 if (student.getId() == id) {
                     System.out.println("Enter new name: ");
                     String name = reader.readLine();
@@ -81,8 +84,9 @@ public class StudentManagement {
                     String data = id + "," + name + "," + college;
                     writeDataToCSV("students.txt", data);
                 } else {
-                    System.out.println("Student not found");
+                    // System.out.println("Student not found");
                 }
+                count++;
             }
         } catch (Exception e) {
             e.printStackTrace();
