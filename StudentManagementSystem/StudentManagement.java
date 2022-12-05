@@ -121,12 +121,13 @@ public class StudentManagement {
         try {
             List<Student> students = readDataFromCSV("students.txt");
             for (Student student : students) {
+                System.out.println(student.getId());
                 if (student.getId() == id) {
                     students.remove(student);
                     System.out.println("Student deleted successfully");
                     break;
                 } else {
-                    System.out.println("Student not found");
+                    // System.out.println("Student not found");
                 }
             }
         } catch (Exception e) {
