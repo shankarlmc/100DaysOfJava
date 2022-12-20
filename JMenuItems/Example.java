@@ -10,17 +10,19 @@ public class Example {
     Example() {
         f = new JFrame();
         // menu items
+        ImageIcon icon = new ImageIcon("./file-icon.png");
         cut = new JMenuItem("Cut");
         copy = new JMenuItem("Copy");
         paste = new JMenuItem("Paste");
         selectAll = new JMenuItem("Select All");
-        saveAs = new JMenuItem("Save As");
+        saveAs = new JMenuItem("Save As", icon);
         saveAll = new JMenuItem("Save All");
         saveAsAll = new JMenuItem("Save As All");
         about = new JMenuItem("About");
 
         // menu bar
         mb = new JMenuBar();
+
         file = new JMenu("File");
         edit = new JMenu("Edit");
         save = new JMenu("Save");
