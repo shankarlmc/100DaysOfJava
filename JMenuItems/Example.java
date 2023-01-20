@@ -10,12 +10,12 @@ public class Example {
     Example() {
         f = new JFrame();
         // menu items
-        ImageIcon icon = new ImageIcon("./file-icon.png");
+        // ImageIcon icon = new ImageIcon("./file-icon.png");
         cut = new JMenuItem("Cut");
         copy = new JMenuItem("Copy");
         paste = new JMenuItem("Paste");
         selectAll = new JMenuItem("Select All");
-        saveAs = new JMenuItem("Save As", icon);
+        saveAs = new JMenuItem("Save As");
         saveAll = new JMenuItem("Save All");
         saveAsAll = new JMenuItem("Save As All");
         about = new JMenuItem("About");
