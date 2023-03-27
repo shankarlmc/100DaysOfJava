@@ -33,7 +33,7 @@ public class MouseListner extends JFrame implements MouseListener, MouseMotionLi
     }
 
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mouse Moved");
+        // System.out.println("Mouse Moved");
     }
 
     MouseListner() {
